@@ -1,15 +1,27 @@
-WebAssembly Micro Runtime
-=========================
+# WebAssembly Micro Runtime for QNX on ARMv7
 
-**A [Bytecode Alliance][BA] project**
+---
 
-[BA]: https://bytecodealliance.org/
+## About QNX Arm7 port
+
+This is fork of [Bytecodealliance WAMR](https://github.com/bytecodealliance/wasm-micro-runtime), adapted to run on QNX on Armv7.
+
+This fork does not currently support WASI, instead WAMR build-in mini-libc must be used.
+
+[Build WAMR VM core](./doc/build_wamr.md) | [Embed WAMR](./doc/embed_wamr.md) | [Export native function](./doc/export_native_api.md) | [Build WASM applications](./doc/build_wasm_app.md) | [Samples](https://github.com/bytecodealliance/wasm-micro-runtime#samples)
+
+---
+
+**A [Bytecode Alliance][ba] project**
+
+[ba]: https://bytecodealliance.org/
 
 **[Guide](https://wamr.gitbook.io/)**&emsp;&emsp;**[Website](https://bytecodealliance.github.io/wamr.dev)**&emsp;&emsp;**[Chat](https://bytecodealliance.zulipchat.com/#narrow/stream/290350-wamr)**
 
 [Build WAMR](./doc/build_wamr.md) | [Build AOT Compiler](./README.md#build-wamrc-aot-compiler) | [Embed WAMR](./doc/embed_wamr.md) | [Export Native API](./doc/export_native_api.md) | [Build WASM Apps](./doc/build_wasm_app.md) | [Samples](./README.md#samples)
 
 WebAssembly Micro Runtime (WAMR) is a lightweight standalone WebAssembly (WASM) runtime with small footprint, high performance and highly configurable features for applications cross from embedded, IoT, edge to Trusted Execution Environment (TEE), smart contract, cloud native and so on. It includes a few parts as below:
+
 - The [**"iwasm" VM core**](./README.md#iwasm-vm-core) to run WASM applications, supporting interpreter mode, AOT mode (Ahead-of-Time compilation) and JIT modes (Just-in-Time compilation, LLVM JIT and Fast JIT are supported)
 
 - The [**"wamrc" AOT compiler**](./README.md#build-wamrc-aot-compiler) to compile WASM file into AOT file for best performance and smaller runtime footprint, which is run by "iwasm" VM Core
@@ -18,10 +30,11 @@ WebAssembly Micro Runtime (WAMR) is a lightweight standalone WebAssembly (WASM) 
 
 - The [**dynamic management**](./README.md#remote-application-management) of the WASM applications
 
-Getting started
-==================
+# Getting started
+
 - [Build iwasm VM core](./doc/build_wamr.md) on [Linux](./doc/build_wamr.md#linux), [SGX](./doc/linux_sgx.md), [MacOS](./doc/build_wamr.md#macos) and [Windows](./doc/build_wamr.md#windows), and [Build wamrc AOT compiler](./README.md#build-wamrc-aot-compiler)
 - [Embed WAMR into host applications](./doc/embed_wamr.md)
+
   - [Embed into C/C++](./doc/embed_wamr.md), [Embed into Python](./language-bindings/python), [Embed into Go](./language-bindings/go)
 
 - [Register native APIs for WASM applications](./doc/export_native_api.md)
@@ -30,8 +43,7 @@ Getting started
 - [Benchmarks](./tests/benchmarks) and [Samples](./samples)
 - [VS Code development container](./doc/devcontainer.md)
 
-iwasm VM core
-=========================
+# iwasm VM core
 
 ### Key features
 
@@ -52,6 +64,7 @@ iwasm VM core
 - Language bindings: [Go](./language-bindings/go/README.md), [Python](./language-bindings/python/README.md)
 
 ### WASM post-MVP features
+
 - [wasm-c-api](https://github.com/WebAssembly/wasm-c-api), ref to [document](doc/wasm_c_api.md) and [sample](samples/wasm-c-api)
 - [128-bit SIMD](https://github.com/WebAssembly/simd), ref to [samples/workload](samples/workload)
 - [Reference Types](https://github.com/WebAssembly/reference-types), ref to [document](doc/ref_types.md) and [sample](samples/ref-types)
@@ -71,8 +84,8 @@ The iwasm supports the following architectures:
 
 The following platforms are supported, click each link below for how to build iwasm on that platform. Refer to [WAMR porting guide](./doc/port_wamr.md) for how to port WAMR to a new platform.
 
-- [Linux](./doc/build_wamr.md#linux),  [Linux SGX (Intel Software Guard Extension)](./doc/linux_sgx.md),  [MacOS](./doc/build_wamr.md#macos),  [Android](./doc/build_wamr.md#android), [Windows](./doc/build_wamr.md#windows), [Windows (MinGW)](./doc/build_wamr.md#mingw)
-- [Zephyr](./doc/build_wamr.md#zephyr),  [AliOS-Things](./doc/build_wamr.md#alios-things),  [VxWorks](./doc/build_wamr.md#vxworks), [NuttX](./doc/build_wamr.md#nuttx), [RT-Thread](./doc/build_wamr.md#RT-Thread), [ESP-IDF](./doc/build_wamr.md#esp-idf)
+- [Linux](./doc/build_wamr.md#linux), [Linux SGX (Intel Software Guard Extension)](./doc/linux_sgx.md), [MacOS](./doc/build_wamr.md#macos), [Android](./doc/build_wamr.md#android), [Windows](./doc/build_wamr.md#windows), [Windows (MinGW)](./doc/build_wamr.md#mingw)
+- [Zephyr](./doc/build_wamr.md#zephyr), [AliOS-Things](./doc/build_wamr.md#alios-things), [VxWorks](./doc/build_wamr.md#vxworks), [NuttX](./doc/build_wamr.md#nuttx), [RT-Thread](./doc/build_wamr.md#RT-Thread), [ESP-IDF](./doc/build_wamr.md#esp-idf)
 
 ### Build iwasm VM core (mini product)
 
@@ -92,6 +105,7 @@ make
 ```
 
 For **Windows**：
+
 ```shell
 cd wamr-compiler
 python build_llvm.py
@@ -111,6 +125,7 @@ cmake --build . --config Release
 ### User cases
 
 WAMR is widely used in a lot areas, here are some cases:
+
 - [Hyperledger Private Data Objects](https://github.com/hyperledger-labs/private-data-objects/blob/main/common/interpreter/wawaka_wasm/README.md)
 - [Inclavare Containers](https://github.com/alibaba/inclavare-containers)
 - [Fassm](https://github.com/faasm/faasm)
@@ -118,16 +133,15 @@ WAMR is widely used in a lot areas, here are some cases:
 - [Envoy Proxy](https://github.com/envoyproxy/envoy)
 - [Apache Teaclave](https://teaclave.apache.org/docs/executing-wasm)
 
-Application framework
-===================================
+# Application framework
 
 By using the iwasm VM core, we are flexible to build different application frameworks for the specific domains, although it would take quite some effort.
 
 The WAMR has offered a comprehensive framework for programming WASM applications for device and IoT usages. The framework supports running multiple applications, that are based on the event driven programming model. Here are the supporting API sets by the [WAMR application framework library](./doc/wamr_api.md) :
 
-- Timer,  Inter-app communication (request/response and pub/sub), Sensor, Connectivity and data transmission, 2D graphic UI
+- Timer, Inter-app communication (request/response and pub/sub), Sensor, Connectivity and data transmission, 2D graphic UI
 
-Browse the folder  [core/app-framework](./core/app-framework) for how to extend the application framework.
+Browse the folder [core/app-framework](./core/app-framework) for how to extend the application framework.
 
 # Remote application management
 
@@ -135,9 +149,7 @@ The WAMR application manager supports [remote application management](./core/app
 
 The tool [host_tool](./test-tools/host-tool) communicates to the WAMR app manager for installing/uninstalling the WASM applications on companion chip from the host system. And the [IoT App Store Demo](./test-tools/IoT-APP-Store-Demo/) shows the conception of remotely managing the device applications from the cloud.
 
-
-WAMR SDK
-==========
+# WAMR SDK
 
 Usually there are two tasks for integrating the WAMR into a particular project:
 
@@ -146,16 +158,14 @@ Usually there are two tasks for integrating the WAMR into a particular project:
 
 The **[WAMR SDK](./wamr-sdk)** tools is helpful to finish the two tasks quickly. It supports menu configuration for selecting WAMR components and builds the WAMR to a SDK package that includes **runtime SDK** and **APP SDK**. The runtime SDK is used for building the native application and the APP SDK should be shipped to WASM application developers.
 
-
-Samples
-=================
+# Samples
 
 The WAMR [samples](./samples) integrate the iwasm VM core, application manager and selected application framework components.
 
 - [**basic**](./samples/basic): Demonstrating how to use runtime exposed API's to call WASM functions, how to register native functions and call them, and how to call WASM function from native function.
 - **[simple](./samples/simple/README.md)**: The runtime is integrated with most of the WAMR APP libraries, and a few WASM applications are provided for testing the WAMR APP API set. It uses **built-in libc** and executes apps in **interpreter** mode by default.
 - **[file](./samples/file/README.md)**: Demonstrating the supported file interaction API of WASI. This sample can also demonstrate the SGX IPFS (Intel Protected File System), enabling an enclave to seal and unseal data at rest.
-- **[littlevgl](./samples/littlevgl/README.md)**: Demonstrating the graphic user interface application usage on WAMR. The whole [LVGL](https://github.com/lvgl/lvgl) 2D user graphic library and the UI application are built into WASM application.  It uses **WASI libc** and executes apps in **AOT mode** by default.
+- **[littlevgl](./samples/littlevgl/README.md)**: Demonstrating the graphic user interface application usage on WAMR. The whole [LVGL](https://github.com/lvgl/lvgl) 2D user graphic library and the UI application are built into WASM application. It uses **WASI libc** and executes apps in **AOT mode** by default.
 - **[gui](./samples/gui/README.md)**: Move the [LVGL](https://github.com/lvgl/lvgl) library into the runtime and define a WASM application interface by wrapping the littlevgl API. It uses **WASI libc** and executes apps in **interpreter** mode by default.
 - **[multi-thread](./samples/multi-thread/)**: Demonstrating how to run wasm application which creates multiple threads to execute wasm functions concurrently, and uses mutex/cond by calling pthread related API's.
 - **[spawn-thread](./samples/spawn-thread)**: Demonstrating how to execute wasm functions of the same wasm application concurrently, in threads created by host embedder or runtime, but not the wasm application itself.
@@ -166,11 +176,11 @@ The WAMR [samples](./samples) integrate the iwasm VM core, application manager a
 - **[workload](./samples/workload/README.md)**: Demonstrating how to build and run some complex workloads, e.g. tensorflow-lite, XNNPACK, wasm-av1, meshoptimizer and bwa.
 - **[sgx-ra](./samples/sgx-ra/README.md)**: Demonstrating how to execute Remote Attestation on SGX with [librats](https://github.com/inclavare-containers/librats), which enables mutual attestation with other runtimes or other entities that support librats to ensure that each is running within the TEE.
 
+# Project Technical Steering Committee
 
-Project Technical Steering Committee
-====================================
 The [WAMR PTSC Charter](./TSC_Charter.md) governs the operations of the project TSC.
 The current TSC members:
+
 - [dongsheng28849455](https://github.com/dongsheng28849455) - **Dongsheng Yan**, <dongsheng.yan@sony.com>
 - [loganek](https://github.com/loganek) - **Marcin Kolny**, <mkolny@amazon.co.uk>
 - [lum1n0us](https://github.com/lum1n0us) - **Liang He**， <liang.he@intel.com>
@@ -182,9 +192,8 @@ The current TSC members:
 - [xwang98](https://github.com/xwang98) - **Xin Wang**， <xin.wang@intel.com> (chair)
 - [yamt](https://github.com/yamt) - **Takashi Yamamoto**, <yamamoto@midokura.com>
 
+# License
 
-License
-=======
 WAMR uses the same license as LLVM: the `Apache 2.0 license` with the LLVM
 exception. See the LICENSE file for details. This license allows you to freely
 use, modify, distribute and sell your own products based on WAMR.
@@ -198,4 +207,3 @@ Check out the [Wiki documents ](https://github.com/bytecodealliance/wasm-micro-r
 - [Roadmap](https://github.com/bytecodealliance/wasm-micro-runtime/wiki/Roadmap)
 - [WAMR TSC meetings](https://github.com/bytecodealliance/wasm-micro-runtime/wiki/TSC-meeting)
 - Technical documents
-
