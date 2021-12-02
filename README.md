@@ -2,11 +2,18 @@
 
 ---
 
-## About QNX Arm7 port
+## About Quux QNX ARMv port
 
-This is fork of [Bytecodealliance WAMR](https://github.com/bytecodealliance/wasm-micro-runtime), adapted to run on QNX on Armv7.
+This is fork of [Bytecodealliance WAMR](https://github.com/bytecodealliance/wasm-micro-runtime),
+adapted to run on QNX on Armv7.
 
 This fork does not currently support WASI, instead WAMR build-in mini-libc must be used.
+
+Quux default branch is named `qnx_armv7_nowasi`.
+
+NOTE: do not create merge request to `main` unless you really mean to - that one goes to Bytecodealliance repo.
+
+---
 
 [Build WAMR VM core](./doc/build_wamr.md) | [Embed WAMR](./doc/embed_wamr.md) | [Export native function](./doc/export_native_api.md) | [Build WASM applications](./doc/build_wasm_app.md) | [Samples](https://github.com/bytecodealliance/wasm-micro-runtime#samples)
 
