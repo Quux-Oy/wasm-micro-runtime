@@ -23,6 +23,9 @@
 #include <math.h>
 #include <sys/mman.h>
 #include <sys/time.h>
+#include <semaphore.h>
+#include <sys/socket.h>
+#include <fcntl.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,6 +47,7 @@ typedef pthread_t korp_tid;
 typedef pthread_mutex_t korp_mutex;
 typedef pthread_cond_t korp_cond;
 typedef pthread_t korp_thread;
+typedef sem_t korp_sem;
 #define BH_THREAD_DEFAULT_PRIORITY 0
 
 #ifdef __cplusplus
